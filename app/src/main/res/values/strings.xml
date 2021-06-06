@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">groupProject</string>
+    <string name="empty" />
+    <string name="search">Tìm Kiếm</string>
+    <string name="todo">TODO</string>
+    <string name="user">Người dùng</string>
+    <string name="category">Thể loại</string>
+    <string name="home">Trang chủ</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="popular">Thịnh hành</string>
+    <string name="publish">Mới công chiếu</string>
+    <string name="recommend">Đề cử</string>
+    <string name="romance">Tình cảm</string>
+    <string name="romcom">Romcom</string>
+    <string name="harem">Harem</string>
+    <string name="action">Hành động</string>
+    <string name="auto">auto</string>
+    <string name="store">Kho phim</string>
+    <string name="image">image</string>
+    <string name="customer">Chưa đăng nhập</string>
+    <string name="login">Đăng nhập</string>
+    <string name="logout">Đăng xuất</string>
+    <string name="register">Đăng ký</string>
+    <string name="like">Phim yêu thích</string>
+    <string name="history">Lịch sử cập nhật</string>
+    <string name="email">Email của bạn</string>
+    <string name="password">Mật khẩu của bạn</string>
+    <string name="l_email">Tài khoản</string>
+    <string name="l_password">Mật khẩu</string>
+    <string name="addition">Chưa có tài khoản,</string>
+    <string name="addition_r">đăng ký tại đây</string>
+    <string name="addition_l">Đã có tài khoản,</string>
+    <string name="addition_l1">đăng nhập tại đây</string>
+    <string name="emptyFavour">Chưa có phim yêu thích</string>
+</resources>
