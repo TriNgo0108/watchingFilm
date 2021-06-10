@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -40,7 +41,28 @@ public class FavouriteActivity extends AppCompatActivity {
         }
         else {
             emptyList.setVisibility(View.INVISIBLE);
-            final MovieAdapter[] movieAdapter = {null};
+            loadData("movies",favouriteView);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadData("movies",favouriteView);
+    }
+
+    private void loadData(String child, RecyclerView recyclerView){
+        SharedPreferences ref = getSharedPreferences("ref",MODE_PRIVATE);
+        Set<String> favourSet = ref.getStringSet("filmIDs",null);
+        final MovieAdapter[] movieAdapter = {null};
+        Log.d("fav",favourSet.toString());
+        if (favourSet.isEmpty()){
+            emptyList.setVisibility(View.VISIBLE);
+            favouriteView.setAdapter(null);
+        }
+        else {
+            emptyList.setVisibility(View.INVISIBLE);
+
             Query query = mDatabase.child("movies/").orderByChild("id");
             ArrayList<Movie> movies = new ArrayList<>();
             query.addChildEventListener(new ChildEventListener() {
@@ -77,44 +99,7 @@ public class FavouriteActivity extends AppCompatActivity {
 
                 }
             });
-           favouriteView.setLayoutManager(new GridLayoutManager(getBaseContext(),2));
+            favouriteView.setLayoutManager(new GridLayoutManager(getBaseContext(),2));
         }
-    }
-    private void loadData(String child, RecyclerView recyclerView){
-        final MovieAdapter[] movieAdapter = {null};
-        Query query = mDatabase.child(child+"/").orderByChild("id");
-        ArrayList<Movie> movies = new ArrayList<>();
-        query.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                movies.add(snapshot.getValue(Movie.class));
-                if (movieAdapter[0] == null){
-                    movieAdapter[0] = new MovieAdapter(movies,getBaseContext());
-                    recyclerView.setAdapter(movieAdapter[0]);
-                }
-                movieAdapter[0].notifyItemChanged(movies.size() - 1);
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable  String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable  String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 }

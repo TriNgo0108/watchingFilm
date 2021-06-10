@@ -2,6 +2,7 @@ package com.b1707000.groupproject;
 
 import android.content.Context;
 
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -86,6 +87,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieHolder> implements I
         intent.putExtra("category",movie.getCategory());
         intent.putExtra("description",movie.getDescription());
         intent.putExtra("amount",movie.getAmount());
-        context.startActivity(intent);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        ContextWrapper cw = new ContextWrapper(context);
+        cw.startActivity(intent);
     }
 }
